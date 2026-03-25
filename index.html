@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Pannellum Demo</title>
+
+  <!-- Pannellum CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum/build/pannellum.css"/>
+
+  <style>
+    #panorama {
+      width: 100%;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+
+<div id="panorama"></div>
+
+<!-- Pannellum JS -->
+<script src="https://cdn.jsdelivr.net/npm/pannellum/build/pannellum.js"></script>
+
+<script>
+pannellum.viewer('panorama', {
+    "type": "equirectangular",
+    "panorama": "panorama.jpg",
+    "autoLoad": true
+});
+</script>
+
+</body>
+</html>
