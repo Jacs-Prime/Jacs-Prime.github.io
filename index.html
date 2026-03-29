@@ -2,31 +2,246 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Pannellum Demo</title>
 
-  <!-- Pannellum CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum/build/pannellum.css"/>
 
   <style>
-    #panorama {
-      width: 100%;
-      height: 100vh;
+    body { margin: 0; display: flex; height: 100vh; font-family: sans-serif; }
+
+    #sidebar {
+      width: 200px;
+      background: #222;
+      color: white;
+      overflow-y: auto;
+      padding: 10px;
     }
+
+    #sidebar ul { list-style: none; padding-left: 15px; }
+    #sidebar li { cursor: pointer; margin: 5px 0; }
+
+    #viewer { flex: 1; }
   </style>
 </head>
+
 <body>
 
-<div id="panorama"></div>
+<div id="sidebar">
+  <ul>
+    <li>Tech
+      <ul>
+        <li onclick="loadScene('tech_willens_atrium_1')">Willens Atrium</li>
+        <li onclick="loadScene('tech_earth_atrium_1')">Earth and Planetary Sciences Atrium</li>
+        <li onclick="loadScene('tech_A110_1')">Tech A110</li>
+      </ul>
+    </li>
+    <li>Harris Hall
+      <ul>
+        <li onclick="loadScene('harris_107_1')">Harris 107</li>
+        <li onclick="loadScene('harris_L07_1')">Harris L07</li>
+      </ul>
+    </li>
+    <li>Fisk Hall
+      <ul>
+        <li onclick="loadScene('fisk_217_1')">Fisk 217</li>
+      </ul>
+    </li>
+    
+    <!-- 
+    <li onclick="loadScene('wirtz_struble_theatre')">Wirtz Struble Theatre</li>
+    <li onclick="loadScene('lutkin_hall')">Lutkin Hall</li>
+    <li onclick="loadScene('norris_louis_room')">Norris Louis Room</li>
+    <li onclick="loadScene('seabury_great_room')">Seabury Great Room</li>
+    -->
+  </ul>
+</div>
 
-<!-- Pannellum JS -->
+<div id="viewer"></div>
+
 <script src="https://cdn.jsdelivr.net/npm/pannellum/build/pannellum.js"></script>
 
 <script>
-pannellum.viewer('panorama', {
-    "type": "equirectangular",
-    "panorama": "panorama.jpg",
-    "autoLoad": true
+const viewer = pannellum.viewer('viewer', {
+  default: {
+    firstScene: 'tech_willens_atrium_1'
+  },
+
+  scenes: {
+    fisk_217_1: {
+      panorama: 'scenes/fisk_217_1.jpg',
+      autoLoad: true,
+      hotSpots: [{
+        pitch: 30,
+        yaw: 130,
+        type: 'scene',
+        text: 'Go to Balcony',
+        sceneId: 'fisk_217_3'
+      },
+      {
+        pitch: -7,
+        yaw: 10,
+        type: 'scene',
+        text: 'Go to Stage',
+        sceneId: 'fisk_217_2'
+      }]
+    },
+    fisk_217_2: {
+      panorama: 'scenes/fisk_217_2.jpg',
+      preview: 'scenes/fisk_217_2_prev.jpg',
+      autoLoad: true,
+      hotSpots: [{
+        pitch: 16,
+        yaw: 2,
+        type: 'scene',
+        text: 'Go to Balcony',
+        sceneId: 'fisk_217_3'
+      },
+      {
+        pitch: -14,
+        yaw: 35,
+        type: 'scene',
+        text: 'Go to Floor',
+        sceneId: 'fisk_217_1'
+      }]
+    },
+    fisk_217_3: {
+      panorama: 'scenes/fisk_217_3.jpg',
+      preview: 'scenes/fisk_217_3_prev.jpg',
+      autoLoad: true,
+      hotSpots: [{
+        pitch: -40,
+        yaw: -30,
+        type: 'scene',
+        text: 'Go to Floor',
+        sceneId: 'fisk_217_1'
+      },
+      {
+        pitch: -20,
+        yaw: 0,
+        type: 'scene',
+        text: 'Go to Stage',
+        sceneId: 'fisk_217_2'
+      }]
+    },
+    harris_107_1: {
+      panorama: 'scenes/harris_107_1.jpg',
+      autoLoad: true,
+      hotSpots: [{
+        pitch: -8,
+        yaw: -2,
+        type: 'scene',
+        text: 'Go to Floor',
+        sceneId: 'harris_107_2'
+      },
+      ]
+    },
+    harris_107_2: {
+      panorama: 'scenes/harris_107_2.jpg',
+      autoLoad: true,
+      hotSpots: [{
+        pitch: -10,
+        yaw: 4,
+        type: 'scene',
+        text: 'Go to Floor',
+        sceneId: 'harris_107_1'
+      },
+      ]
+    },
+    harris_L07_1: {//add hotspots w/ link to reservation info
+      panorama: 'scenes/harris_L07_1.jpg',
+      autoLoad: true,
+    },
+    tech_earth_atrium_1: {
+      panorama: 'scenes/tech_earth_atrium_1.jpg',
+      autoLoad: true,
+      hotSpots: [{
+        pitch: 20,
+        yaw: 0,
+        type: 'scene',
+        text: 'Go to 3rd Floor',
+        sceneId: 'tech_earth_atrium_2'
+      },
+      ]
+    },
+    tech_earth_atrium_2: {
+      panorama: 'scenes/tech_earth_atrium_2.jpg',
+      autoLoad: true,
+      hotSpots: [{
+        pitch: -20,
+        yaw: 3,
+        type: 'scene',
+        text: 'Go to 2nd Floor',
+        sceneId: 'tech_earth_atrium_1'
+      },
+      ]
+    },
+    tech_willens_atrium_1: {
+      panorama: 'scenes/tech_willens_atrium_1.jpg',
+      autoLoad: true,
+      hotSpots: [{
+        pitch: 18,
+        yaw: 0,
+        type: 'scene',
+        text: 'Go to 3rd Floor',
+        sceneId: 'tech_willens_atrium_2'
+      },
+      {
+        pitch: -10,
+        yaw: 0,
+        type: 'scene',
+        text: 'Go to Entrance',
+        sceneId: 'tech_willens_atrium_3'
+      },
+      ]
+    },
+    tech_willens_atrium_2: {
+      panorama: 'scenes/tech_willens_atrium_2.jpg',
+      autoLoad: true,
+      hotSpots: [{
+        pitch: -22,
+        yaw: -3,
+        type: 'scene',
+        text: 'Go to 2nd Floor',
+        sceneId: 'tech_willens_atrium_1'
+      },
+      {
+        pitch: -60,
+        yaw: 0,
+        type: 'scene',
+        text: 'Go to 2nd Floor Entrance',
+        sceneId: 'tech_willens_atrium_3'
+      },
+      ]
+    },
+    tech_willens_atrium_3: {
+      panorama: 'scenes/tech_willens_atrium_3.jpg',
+      autoLoad: true,
+      hotSpots: [{
+        pitch: 90,
+        yaw: 0,
+        type: 'scene',
+        text: 'Go to 3rd Floor',
+        sceneId: 'tech_willens_atrium_2'
+      },
+      {
+        pitch: -10,
+        yaw: 0,
+        type: 'scene',
+        text: 'Go to Back',
+        sceneId: 'tech_willens_atrium_1'
+      },
+      ]
+    },
+    tech_A110_1: {
+      panorama: 'scenes/tech_A110_1.jpg',
+      autoLoad: true,
+    },
+
+  }
 });
+
+function loadScene(sceneId) {
+  viewer.loadScene(sceneId);
+}
 </script>
 
 </body>
