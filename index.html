@@ -9,17 +9,37 @@
     body { margin: 0; display: flex; height: 100vh; font-family: sans-serif; }
 
     #sidebar {
-      width: 200px;
-      background: #222;
-      color: white;
-      overflow-y: auto;
-      padding: 10px;
-    }
-
-    #sidebar ul { list-style: none; padding-left: 15px; }
-    #sidebar li { cursor: pointer; margin: 5px 0; }
-
-    #viewer { flex: 1; }
+    width: 260px;
+    background: #1e1e1e;
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    color: #aaa;
+  }
+  #sidebar ul {
+    padding-top:5px;
+    padding-left: 20px;
+    margin: 0;
+  }
+  .item {
+    margin: 4px 0;
+    padding: 6px 8px;
+    border-radius: 6px;
+    line-height: 1.1;
+  }
+  .item:hover {
+    background: #333;
+  }
+  .item.active {
+    background: #007acc;
+    color: white;
+  }
+  #sidebar-image {
+    margin-top: auto;
+    height: 400px;
+    background-size: cover;
+  }
+  #viewer { flex: 1; }
   </style>
 </head>
 
@@ -27,32 +47,34 @@
 
 <div id="sidebar">
   <ul>
-    <li>Tech
+    <li class="item" onclick="loadScene('fisk_217_1')">Fisk Hall 217</li> 
+    <li class="folder">Harris Hall
       <ul>
-        <li onclick="loadScene('tech_willens_atrium_1')">Willens Atrium</li>
-        <li onclick="loadScene('tech_earth_atrium_1')">Earth and Planetary Sciences Atrium</li>
-        <li onclick="loadScene('tech_A110_1')">Tech A110</li>
+        <li class="item" onclick="loadScene('harris_107_1')">Harris 107</li>
+        <li class="item" onclick="loadScene('harris_L07_1')">Harris L07</li>
       </ul>
     </li>
-    <li>Harris Hall
+    <li class="item" onclick="loadScene('kresge_kaplan_1')">Kresge Alice Kaplan Institute Lounge</li> 
+    <li class="item" onclick="loadScene('lutkin_hall_1')">Lutkin Hall</li>
+    <li class="item" onclick="loadScene('norris_louis_1')">Norris Louis Room</li> 
+    <li class="folder">Silverman Hall 
+      <ul> 
+        <li class="item" onclick="loadScene('silverman_lobby_1_1')">Lobby First Floor</li> 
+        <li class="item" onclick="loadScene('silverman_lobby_2_1')">Lobby Second Floor</li> 
+        <li class="item" onclick="loadScene('silverman_lobby_3_1')">Lobby Thrid Floor</li> 
+        <li class="item" onclick="loadScene('silverman_lobby_4_1')">Lobby Fourth Floor</li> 
+      </ul> 
+    </li> 
+    <li class="folder">Tech
       <ul>
-        <li onclick="loadScene('harris_107_1')">Harris 107</li>
-        <li onclick="loadScene('harris_L07_1')">Harris L07</li>
+        <li class="item" onclick="loadScene('tech_willens_atrium_1')">Willens Atrium</li>
+        <li class="item" onclick="loadScene('tech_earth_atrium_1')">Earth and Planetary Sciences Atrium</li>
+        <li class="item" onclick="loadScene('tech_A110_1')">Tech A110</li>
       </ul>
     </li>
-    <li>Fisk Hall
-      <ul>
-        <li onclick="loadScene('fisk_217_1')">Fisk 217</li>
-      </ul>
-    </li>
-    
-    <!-- 
-    <li onclick="loadScene('wirtz_struble_theatre')">Wirtz Struble Theatre</li>
-    <li onclick="loadScene('lutkin_hall')">Lutkin Hall</li>
-    <li onclick="loadScene('norris_louis_room')">Norris Louis Room</li>
-    <li onclick="loadScene('seabury_great_room')">Seabury Great Room</li>
-    -->
+    <li class="item" onclick="loadScene('wirtz_struble_theatre_1')">Wirtz Center Struble Theatre</li>
   </ul>
+  <div id="sidebar-image"></div>
 </div>
 
 <div id="viewer"></div>
@@ -66,6 +88,196 @@ const viewer = pannellum.viewer('viewer', {
   },
 
   scenes: {
+    norris_louis_1: {
+      panorama: 'scenes/norris_louis_1.jpg',
+      autoLoad: true,
+      hotSpots: [{
+        pitch: -6,
+        yaw: -2.5,
+        type: 'scene',
+        text: 'Go to Stage',
+        sceneId: 'norris_louis_2'
+      },
+      ]
+    },
+    norris_louis_2: {
+      panorama: 'scenes/norris_louis_2.jpg',
+      autoLoad: true,
+      hotSpots: [{
+        pitch: -6,
+        yaw: 0.5,
+        type: 'scene',
+        text: 'Go to Stage',
+        sceneId: 'norris_louis_1'
+      },
+      ]
+    },
+    lutkin_hall_1: {
+      panorama: 'scenes/lutkin_hall_1.jpg',
+      autoLoad: true,
+      hotSpots: [{
+        pitch: -4,
+        yaw: -1,
+        type: 'scene',
+        text: 'Go to Stage',
+        sceneId: 'lutkin_hall_2'
+      },
+      ]
+    },
+    lutkin_hall_2: {
+      panorama: 'scenes/lutkin_hall_2.jpg',
+      autoLoad: true,
+      hotSpots: [{
+        pitch: -6,
+        yaw: -18,
+        type: 'scene',
+        text: 'Go to Enterance',
+        sceneId: 'lutkin_hall_1'
+      },
+      ]
+    },
+    wirtz_struble_theatre_1: {
+      panorama: 'scenes/wirtz_struble_theatre_1.jpg',
+      autoLoad: true,
+      hotSpots: [{
+        pitch: -4,
+        yaw: -24,
+        type: 'scene',
+        text: 'Go to Stage',
+        sceneId: 'wirtz_struble_theatre_2'
+      },
+      ]
+    },
+    wirtz_struble_theatre_2: {
+      panorama: 'scenes/wirtz_struble_theatre_2.jpg',
+      autoLoad: true,
+      hotSpots: [{
+        pitch: -7,
+        yaw: -3,
+        type: 'scene',
+        text: 'Go to Enterance',
+        sceneId: 'wirtz_struble_theatre_1'
+      },
+      ]
+    },
+    kresge_kaplan_1: {
+      panorama: 'scenes/kresge_kaplan_1.jpg',
+      autoLoad: true,
+    },
+    silverman_lobby_1_1: {
+      panorama: 'scenes/silverman_lobby_1_1.jpg',
+      autoLoad: true,
+      hotSpots: [{
+        pitch: -7,
+        yaw: 2,
+        type: 'scene',
+        text: 'Go to Back',
+        sceneId: 'silverman_lobby_1_2'
+      },
+      {
+        pitch: 22,
+        yaw: 5,
+        type: 'scene',
+        text: 'Go to 2nd Floor',
+        sceneId: 'silverman_lobby_2_1'
+      },
+      ]
+    },
+    silverman_lobby_1_2: {
+      panorama: 'scenes/silverman_lobby_1_2.jpg',
+      autoLoad: true,
+      hotSpots: [{
+        pitch: -5,
+        yaw: -15,
+        type: 'scene',
+        text: 'Go to Front',
+        sceneId: 'silverman_lobby_1_1'
+      },
+      {
+        pitch: 50,
+        yaw: 0,
+        type: 'scene',
+        text: 'Go to 2nd Floor',
+        sceneId: 'silverman_lobby_2_1'
+      },
+      ]
+    },
+    silverman_lobby_2_1: {
+      panorama: 'scenes/silverman_lobby_2_1.jpg',
+      autoLoad: true,
+      hotSpots: [{
+        pitch: -90,
+        yaw: 0,
+        type: 'scene',
+        text: 'Go Down',
+        sceneId: 'silverman_lobby_1_2'
+      },
+      {
+        pitch: -32,
+        yaw: 3,
+        type: 'scene',
+        text: 'Go to 1st Floor',
+        sceneId: 'silverman_lobby_1_1'
+      },
+      ]
+    },
+    silverman_lobby_3_1: {
+      panorama: 'scenes/silverman_lobby_3_1.jpg',
+      autoLoad: true,
+      hotSpots: [{
+        pitch: -7,
+        yaw: 5,
+        type: 'scene',
+        text: 'Go to Back',
+        sceneId: 'silverman_lobby_3_2'
+      },
+      {
+        pitch: 22,
+        yaw: 8,
+        type: 'scene',
+        text: 'Go to 4th Floor',
+        sceneId: 'silverman_lobby_4_1'
+      },
+      ]
+    },
+    silverman_lobby_3_2: {
+      panorama: 'scenes/silverman_lobby_3_2.jpg',
+      autoLoad: true,
+      hotSpots: [{
+        pitch: -5,
+        yaw: 0,
+        type: 'scene',
+        text: 'Go to Front',
+        sceneId: 'silverman_lobby_3_1'
+      },
+      {
+        pitch: 37,
+        yaw: 0,
+        type: 'scene',
+        text: 'Go to 2nd Floor',
+        sceneId: 'silverman_lobby_4_1'
+      },
+      ]
+    },
+    silverman_lobby_4_1: {
+      panorama: 'scenes/silverman_lobby_4_1.jpg',
+      autoLoad: true,
+      hotSpots: [{
+        pitch: -90,
+        yaw: 0,
+        type: 'scene',
+        text: 'Go Down',
+        sceneId: 'silverman_lobby_3_2'
+      },
+      {
+        pitch: -25,
+        yaw: 6,
+        type: 'scene',
+        text: 'Go to 3rd Floor',
+        sceneId: 'silverman_lobby_3_1'
+      },
+      ]
+    },
     fisk_217_1: {
       panorama: 'scenes/fisk_217_1.jpg',
       autoLoad: true,
@@ -242,6 +454,37 @@ const viewer = pannellum.viewer('viewer', {
 function loadScene(sceneId) {
   viewer.loadScene(sceneId);
 }
+function loadScene(id) {
+  viewer.loadScene(id, null);
+  document.querySelectorAll('.item').forEach(el => {
+    el.classList.remove('active');
+    if (el.getAttribute('onclick')?.includes(id)) {
+      el.classList.add('active');
+    }
+  });
+  updateSidebarImage(id);
+}
+
+const SCENE_IMAGES = {
+  tech_willens_atrium_1: "maps/default_map.jpg",
+  //tech_earth_atrium_1: "scenes/tech_A110_1.jpg",
+  //harris_107_1: "images/harris107.jpg"
+};
+function updateSidebarImage(sceneId) {
+  const img = SCENE_IMAGES[sceneId];
+  const el = document.getElementById("sidebar-image");
+
+  if (img) {
+    el.style.backgroundImage = `url(${img})`;
+  } else {
+    el.style.backgroundImage = "maps/default_map.jpg";
+  }
+}
+viewer.on('load', function() {
+  const sceneId = viewer.getScene();
+  updateSidebarImage(sceneId);
+});
+
 </script>
 
 </body>
