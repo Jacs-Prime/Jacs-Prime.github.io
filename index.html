@@ -5,6 +5,9 @@
   <title>Room Images</title>
   <link rel="icon" type="image/x-icon" href="icon.ico">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum/build/pannellum.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
 
   <style>
     body { margin: 0; display: flex; height: 100vh; font-family: sans-serif; }
@@ -35,12 +38,17 @@
     background: #007acc;
     color: white;
   }
-  #sidebar-image {
+  /* #sidebar-image {
     margin-top: auto;
     height: 400px;
     background-size: cover;
-  }
+  } */
   #viewer { flex: 1; }
+
+  #map { 
+    margin-top: auto;
+    height: 400px; 
+  }
   </style>
 </head>
 
@@ -75,13 +83,28 @@
     </li>
     <li class="item" onclick="loadScene('wirtz_struble_theatre_1')">Wirtz Center Struble Theatre</li>
   </ul>
-  <div id="sidebar-image"></div>
+  <!-- <div id="sidebar-image"></div> -->
+  <div id="map"></div>
 </div>
 
 <div id="viewer"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/pannellum/build/pannellum.js"></script>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+crossorigin=""></script>
+
+<!-- leaflet code -->
+<script>
+  var map = L.map('map').setView([42.0567, -87.6738], 15);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+</script>
+
+<!-- pannellum viewer code -->
 <script>
 const viewer = pannellum.viewer('viewer', {
   default: {
@@ -463,7 +486,7 @@ function loadScene(id) {
       el.classList.add('active');
     }
   });
-  updateSidebarImage(id);
+  //updateSidebarImage(id);
 }
 
 const SCENE_IMAGES = {
@@ -481,10 +504,10 @@ function updateSidebarImage(sceneId) {
     el.style.backgroundImage = "maps/default_map.jpg";
   }
 }
-viewer.on('load', function() {
-  const sceneId = viewer.getScene();
-  updateSidebarImage(sceneId);
-});
+// viewer.on('load', function() {
+//   const sceneId = viewer.getScene();
+//   updateSidebarImage(sceneId);
+// });
 
 </script>
 
