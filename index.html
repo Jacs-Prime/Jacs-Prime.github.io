@@ -24,12 +24,13 @@
     padding-top:5px;
     padding-left: 20px;
     margin: 0;
+    overflow: auto;
   }
   .item {
     margin: 4px 0;
-    padding: 6px 8px;
+    padding: 6px 6px;
     border-radius: 6px;
-    line-height: 1.1;
+    line-height: 1.0;
   }
   .item:hover {
     background: #333;
@@ -38,11 +39,7 @@
     background: #007acc;
     color: white;
   }
-  /* #sidebar-image {
-    margin-top: auto;
-    height: 400px;
-    background-size: cover;
-  } */
+  
   #viewer { flex: 1; }
 
   #map { 
@@ -56,34 +53,33 @@
 
 <div id="sidebar">
   <ul>
-    <li class="item" onclick="loadScene('fisk_217_1')">Fisk Hall 217</li> 
+    <li class="item" onclick="loadScene('fisk_217_1');pan(fisk_217_1)">Fisk Hall 217</li> 
     <li class="folder">Harris Hall
       <ul>
-        <li class="item" onclick="loadScene('harris_107_1')">Harris 107</li>
-        <li class="item" onclick="loadScene('harris_L07_1')">Harris L07</li>
+        <li class="item" data-scene="harris_107_1" onclick="loadScene('harris_107_1');pan(harris_107_1)">Harris 107</li>
+        <li class="item" data-scene="harris_L07_1" onclick="loadScene('harris_L07_1');pan(harris_107_1)">Harris L07</li>
       </ul>
     </li>
-    <li class="item" onclick="loadScene('kresge_kaplan_1')">Kresge Alice Kaplan Institute Lounge</li> 
-    <li class="item" onclick="loadScene('lutkin_hall_1')">Lutkin Hall</li>
-    <li class="item" onclick="loadScene('norris_louis_1')">Norris Louis Room</li> 
+    <li class="item" data-scene="kresge_kaplan_1" onclick="loadScene('kresge_kaplan_1');pan(kresge_kaplan_1)">Kresge Alice Kaplan Institute Lounge</li> 
+    <li class="item" data-scene="lutkin_hall_1" onclick="loadScene('lutkin_hall_1');pan(lutkin_hall_1)">Lutkin Hall</li>
+    <li class="item" data-scene="norris_louis_1" onclick="loadScene('norris_louis_1');pan(norris_louis_1)">Norris Louis Room</li> 
     <li class="folder">Silverman Hall 
       <ul> 
-        <li class="item" onclick="loadScene('silverman_lobby_1_1')">Lobby First Floor</li> 
-        <li class="item" onclick="loadScene('silverman_lobby_2_1')">Lobby Second Floor</li> 
-        <li class="item" onclick="loadScene('silverman_lobby_3_1')">Lobby Thrid Floor</li> 
-        <li class="item" onclick="loadScene('silverman_lobby_4_1')">Lobby Fourth Floor</li> 
+        <li class="item" data-scene="silverman_lobby_1_1" onclick="loadScene('silverman_lobby_1_1');pan(silverman_lobby_1_1)">First Floor Lobby</li> 
+        <li class="item" data-scene="silverman_lobby_2_1" onclick="loadScene('silverman_lobby_2_1');pan(silverman_lobby_1_1)">Second Floor Lobby</li> 
+        <li class="item" data-scene="silverman_lobby_3_1" onclick="loadScene('silverman_lobby_3_1');pan(silverman_lobby_1_1)">Thrid Floor Lobby</li> 
+        <li class="item" data-scene="silverman_lobby_4_1" onclick="loadScene('silverman_lobby_4_1');pan(silverman_lobby_1_1)">Fourth Floor Lobby</li> 
       </ul> 
     </li> 
     <li class="folder">Tech
       <ul>
-        <li class="item" onclick="loadScene('tech_willens_atrium_1')">Willens Atrium</li>
-        <li class="item" onclick="loadScene('tech_earth_atrium_1')">Earth and Planetary Sciences Atrium</li>
-        <li class="item" onclick="loadScene('tech_A110_1')">Tech A110</li>
+        <li class="item" data-scene="tech_willens_atrium_1" onclick="loadScene('tech_willens_atrium_1');pan(tech_willens_atrium_1)">Willens Atrium</li>
+        <li class="item" data-scene="tech_earth_atrium_1" onclick="loadScene('tech_earth_atrium_1');pan(tech_earth_atrium_1)">Earth and Planetary Sciences Atrium</li>
+        <li class="item" data-scene="tech_A110_1" onclick="loadScene('tech_A110_1');map.panTo(tech_willens_atrium_1.getLatLng(), 14);">Tech A110</li>
       </ul>
     </li>
-    <li class="item" onclick="loadScene('wirtz_struble_theatre_1')">Wirtz Center Struble Theatre</li>
+    <li class="item" data-scene="wirtz_struble_theatre_1" onclick="loadScene('wirtz_struble_theatre_1');pan(wirtz_struble_theatre_1)">Wirtz Center Struble Theatre</li>
   </ul>
-  <!-- <div id="sidebar-image"></div> -->
   <div id="map"></div>
 </div>
 
@@ -102,6 +98,19 @@ crossorigin=""></script>
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
+var tech_willens_atrium_1 = L.marker([42.058271, -87.675865]).addTo(map); tech_willens_atrium_1.bindPopup("<b>Willens Atrium</b>");
+
+var fisk_217_1 = L.marker([42.050842, -87.674141]).addTo(map); fisk_217_1.bindPopup("<b>Fisk 217</b>");
+var harris_107_1 = L.marker([42.051256, -87.676180]).addTo(map); harris_107_1.bindPopup("<b>Harris Hall</b>");
+var kresge_kaplan_1 = L.marker([42.051609, -87.675061]).addTo(map); kresge_kaplan_1.bindPopup("<b>Kaplan Lounge</b>");
+var lutkin_hall_1 = L.marker([42.051023, -87.680249]).addTo(map); lutkin_hall_1.bindPopup("<b>Lutkin Hall</b>");
+var norris_louis_1 = L.marker([42.053409, -87.672572]).addTo(map); norris_louis_1.bindPopup("<b>Louis Room</b>");
+var silverman_lobby_1_1 = L.marker([42.056392, -87.673817]).addTo(map); silverman_lobby_1_1.bindPopup("<b>Silverman Lobbies</b>");
+var tech_earth_atrium_1 = L.marker([42.057389, -87.676236]).addTo(map); tech_earth_atrium_1.bindPopup("<b>Earth and Planetary Sciences Atrium</b>");
+var wirtz_struble_theatre_1 = L.marker([42.051987, -87.673288]).addTo(map); wirtz_struble_theatre_1.bindPopup("<b>Struble Theatre</b>");
+
+var seabury_great_room_1 = L.marker([42.057070, -87.678653]).addTo(map); seabury_great_room_1.bindPopup("<b>Great Room</b>");
+
 </script>
 
 <!-- pannellum viewer code -->
@@ -475,39 +484,17 @@ const viewer = pannellum.viewer('viewer', {
   }
 });
 
-function loadScene(sceneId) {
-  viewer.loadScene(sceneId);
-}
 function loadScene(id) {
   viewer.loadScene(id, null);
   document.querySelectorAll('.item').forEach(el => {
-    el.classList.remove('active');
-    if (el.getAttribute('onclick')?.includes(id)) {
-      el.classList.add('active');
-    }
+    el.classList.toggle('active', el.dataset.scene === id);
   });
-  //updateSidebarImage(id);
 }
 
-const SCENE_IMAGES = {
-  tech_willens_atrium_1: "maps/default_map.jpg",
-  //tech_earth_atrium_1: "scenes/tech_A110_1.jpg",
-  //harris_107_1: "images/harris107.jpg"
-};
-function updateSidebarImage(sceneId) {
-  const img = SCENE_IMAGES[sceneId];
-  const el = document.getElementById("sidebar-image");
-
-  if (img) {
-    el.style.backgroundImage = `url(${img})`;
-  } else {
-    el.style.backgroundImage = "maps/default_map.jpg";
-  }
+function pan(mark){
+  mark.openPopup();
+  map.panTo(mark.getLatLng(), 14);
 }
-// viewer.on('load', function() {
-//   const sceneId = viewer.getScene();
-//   updateSidebarImage(sceneId);
-// });
 
 </script>
 
